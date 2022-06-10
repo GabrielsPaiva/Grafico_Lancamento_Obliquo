@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 // imagens
 import downArrow from "../assets/downArrow.png"
+import Operations from "./Operations"
 
 const MainBox = styled.div`
 display: flex;
@@ -54,8 +55,18 @@ cursor: pointer;
 }
 `
 
+// Operations Modal Section
+const OperationsBox = styled.div`
+background-color: whitesmoke;
+margin: 4em 0 0 2em;
+width: 50.5%;
+height: fit-content;
+`
+
 export default function Main() {
+
     const [isOptionsOpen, setIsOptionsOpen] = useState(true)
+    const [optionIndex, setOptionIndex] = useState(null)
     const [options] = useState([
         "Espaço = S ou H",
         "Tempo = t",
@@ -63,40 +74,26 @@ export default function Main() {
         "Velocidade Inicial no Y = Viy",
         "Velocidade Inicial no X = Vx",
     ])
-    const [operations, setOperations] = useState({
-        S: false,
-        t: false,
-        V: false,
-        Viy: false,
-        Vx: false,
-    })
 
     const optionsRender = () => {
         if (isOptionsOpen) {
-            return options.map((item, id) => (
-                <Options key={id} onClick={() => { showOperation(id) }}>{item}</Options>
+            return options.map( (item,id) => (
+                <Options key={id} onClick={() => {setOptionIndex(id)}}>{item}</Options>
             ))
         }
     }
-    const showOperation = (id) => {
-        console.log(id)
-        if (id === 0) {
-            setOperations({...operations, S : true})
-        } else if (id === 1) {
-            setOperations({...operations, t : true,})
-        } else if (id === 2) {
-            setOperations({...operations, V : true})
-        } else if (id === 3) {
-            setOperations({...operations, Viy : true})
-        } else {
-            setOperations({...operations,Vx : true})
-        }
+console.log(optionIndex)
+    const renderOperations = () => {
+        return (
+            <OperationsBox>
+                <Operations optionId={optionIndex}/>
+            </OperationsBox>
+        )
     }
 
     useEffect(() => {
     }, [])
 
-    console.log(operations)
     return (
         <MainBox>
             <MainFloatingBlock>
@@ -110,6 +107,7 @@ export default function Main() {
                         </OptionsBox>
                     }
                 </TasksOptionBox>
+                {renderOperations()}
             </MainFloatingBlock>
         </MainBox>
     )

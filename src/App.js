@@ -18,14 +18,14 @@ const AppGeneralBox = styled.div`
 background: fixed url("https://thumbs.dreamstime.com/b/physics-science-seamless-pattern-background-book-light-bulbs-electric-circuits-models-atom-earth-magnetic-field-74933302.jpg");
 `
 
-export default class App extends React.Component{
+export default class App extends React.Component {
 
-  render(){
-    return(
+  render() {
+    return (
       <AppGeneralBox>
-        <GlobalStyle/>
-        <Header/>
-        <Main/>
+        <GlobalStyle />
+        <Header />
+        <Main />
       </AppGeneralBox>
     )
   }
